@@ -17,6 +17,49 @@ def main():
     pygame.draw.rect(DISPLAY,WHITE,player_one)
     pygame.draw.rect(DISPLAY,WHITE,player_two)
 
+
+    def checkPlayerOne(keys):
+        if keys[K_DOWN]:           
+            print('down')  
+            pygame.draw.rect(DISPLAY,BLACK,player_one)          
+            player_one.top = player_one.top+1             
+            pygame.draw.rect(DISPLAY,WHITE,player_one)  
+        if keys[K_UP]:     
+            print('up')          
+            pygame.draw.rect(DISPLAY,BLACK,player_one)          
+            player_one.top = player_one.top-1             
+            pygame.draw.rect(DISPLAY,WHITE,player_one)  
+
+    def checkPlayerTwo(keys):
+        if keys[K_s]:           
+            print('down')  
+            pygame.draw.rect(DISPLAY,BLACK,player_two)          
+            player_two.top = player_two.top+1             
+            pygame.draw.rect(DISPLAY,WHITE,player_two)  
+        if keys[K_w]:     
+            print('up')          
+            pygame.draw.rect(DISPLAY,BLACK,player_two)          
+            player_two.top = player_two.top-1             
+            pygame.draw.rect(DISPLAY,WHITE,player_two) 
+
+
+
+
+    while True:        
+        pygame.display.update()
+        keys = key.get_pressed() 
+        checkPlayerOne(keys)
+        checkPlayerTwo(keys)
+        if keys[K_ESCAPE]:
+            pygame.quit()
+            sys.exit()                         
+        for e in pygame.event.get():            
+            pass
+            
+
+
+main()
+
     # while True:
     #     for event in pygame.event.get():
     #         keys = key.get_pressed()
@@ -33,27 +76,3 @@ def main():
     #             pygame.draw.rect(DISPLAY,WHITE,player_one)
     #             pygame.display.update()
     #     pygame.display.update()
-
-    while True:        
-        pygame.display.update()
-        keys = key.get_pressed() 
-        if keys[K_DOWN]:           
-            print('down')  
-            pygame.draw.rect(DISPLAY,BLACK,player_one)          
-            player_one.top = player_one.top+1             
-            pygame.draw.rect(DISPLAY,WHITE,player_one)  
-        if keys[K_UP]:     
-            print('up')          
-            pygame.draw.rect(DISPLAY,BLACK,player_one)          
-            player_one.top = player_one.top-1             
-            pygame.draw.rect(DISPLAY,WHITE,player_one)                              
-        for e in pygame.event.get():
-            if e.type==QUIT:
-                pygame.quit()
-                sys.exit()
-            print('pass')
-            pass
-            
-
-
-main()
