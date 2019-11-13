@@ -14,8 +14,8 @@ def main():
     BLACK=(0,0,255)
 
     ball = Ball()
-    player1 = Player(10)
-    player2 = Player(775)
+    player1 = Player(5)
+    player2 = Player( (Constants.WIDTH-Constants.PLAYER_WIDTH)-5)
 
     DISPLAY.fill(BLACK)
     
@@ -27,6 +27,9 @@ def main():
 
     def moveBall():
         pygame.draw.rect(DISPLAY,BLACK,ball)
+        
+        ball.collission_left(player1)
+        ball.collission_right(player2)
         ball.move()
         pygame.draw.rect(DISPLAY,WHITE,ball)
 
@@ -50,12 +53,13 @@ def main():
             pygame.draw.rect(DISPLAY,BLACK,player2)          
             player2.moveUp()
             pygame.draw.rect(DISPLAY,WHITE,player2) 
+        
 
     clock=pygame.time.Clock()
 
 
     while True:       
-        clock.tick(200) 
+        clock.tick(500) 
         pygame.display.update()
         
         keys = key.get_pressed() 
@@ -64,9 +68,20 @@ def main():
         check_player2(keys)
         if keys[K_ESCAPE]:
             pygame.quit()
-            sys.exit()                         
+            sys.exit()       
+        if keys[K_o]:
+            print(f'\n ball.top={ball.rect.top}\n player.top={player1.rect.top}\n')
+            
         for e in pygame.event.get():            
             pass
+
+    
+
+    
+
+
+
+
             
 
 

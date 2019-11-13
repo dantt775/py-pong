@@ -3,7 +3,12 @@ from constants import Constants
 
 class Player:
     def __init__(self, left):
-        self.rect = pygame.Rect(left,150,15,100)
+        self.rect = pygame.Rect(
+                        left,
+                        Constants.PLAYER_INITIAL_TOP,
+                        Constants.PLAYER_WIDTH,
+                        Constants.PLAYER_HEIGHT
+                    )
     
     def moveUp(self):        
         if (self.rect.top > 5):#check screen limits
