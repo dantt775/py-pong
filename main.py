@@ -3,6 +3,7 @@ from pygame.locals import *
 from pygame import quit, key
 from player import Player
 from constants import Constants
+from ball import Ball
 
 def main():    
     pygame.init()
@@ -12,6 +13,7 @@ def main():
     WHITE=(255,255,255)
     BLACK=(0,0,255)
 
+    ball = Ball()
     player1 = Player(10)
     player2 = Player(775)
 
@@ -20,9 +22,16 @@ def main():
     
     pygame.draw.rect(DISPLAY,WHITE,player1)
     pygame.draw.rect(DISPLAY,WHITE,player2)
+    pygame.draw.rect(DISPLAY,WHITE,ball)
 
 
-    def checkPlayerOne(keys):
+    def moveBall():
+        pygame.draw.rect(DISPLAY,BLACK,ball)
+        ball.move()
+        pygame.draw.rect(DISPLAY,WHITE,ball)
+
+
+    def check_player1(keys):
         if keys[K_s]:                        
             pygame.draw.rect(DISPLAY,BLACK,player1)          
             player1.movDown()           
@@ -32,7 +41,7 @@ def main():
             player1.moveUp()         
             pygame.draw.rect(DISPLAY,WHITE,player1)  
 
-    def checkPlayerTwo(keys):
+    def check_player2(keys):
         if keys[K_DOWN]:                       
             pygame.draw.rect(DISPLAY,BLACK,player2)          
             player2.movDown()           
@@ -42,14 +51,17 @@ def main():
             player2.moveUp()
             pygame.draw.rect(DISPLAY,WHITE,player2) 
 
+    clock=pygame.time.Clock()
 
 
-
-    while True:        
+    while True:       
+        clock.tick(200) 
         pygame.display.update()
+        
         keys = key.get_pressed() 
-        checkPlayerOne(keys)
-        checkPlayerTwo(keys)
+        moveBall()
+        check_player1(keys)
+        check_player2(keys)
         if keys[K_ESCAPE]:
             pygame.quit()
             sys.exit()                         
