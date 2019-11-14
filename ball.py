@@ -4,7 +4,7 @@ from constants import Constants
 
 class Ball:
     def __init__(self):
-        self.rect = pygame.Rect(400, 150, 15, 15)
+        self.rect = pygame.Rect(400, 15, 15, 15)
         self.left = True
         self.down = True
 
@@ -12,7 +12,7 @@ class Ball:
 
     def calculate_top_position(self, player):
         value =abs(self.rect.top - player.rect.top)        
-        if (13 <= value <= 97):
+        if (13 <= value <= 98):
             return True
     
     def calculate_left_position(self, player):
@@ -23,12 +23,12 @@ class Ball:
         if self.rect.left==(player.rect.left-Constants.PLAYER_WIDTH):
             return True
     
-    def collission_left(self, player):
+    def collission_left(self, player):        
         if( self.calculate_left_position(player) and self.calculate_top_position(player)):            
+            print(f'ball left =  {self.rect.left}\n player left = {player.rect.left}')
             self.left = False
 
-    def collission_right(self, player):
-        print(f'{self.rect.top - player.rect.top}')
+    def collission_right(self, player):        
         if(self.calculate_right_position(player) and self.calculate_top_position(player)):            
             self.left = True    
 
@@ -46,18 +46,17 @@ class Ball:
             
 
     def move_up(self):
-        if (self.rect.top > 0 and self.down is False):
+        if (self.rect.top > 5 and self.down is False):
             self.rect.top -=1
         
-        if(self.rect.top ==0):
+        if(self.rect.top ==5):
             self.down=True
 
     
-    def move_down(self):
-        
-        if (self.rect.top < (Constants.HEIGHT-self.rect.height) and self.down is True):
+    def move_down(self):        
+        if (self.rect.top < ((Constants.HEIGHT-self.rect.height)-5) and self.down is True):
             self.rect.top+=1
-        if (self.rect.top == (Constants.HEIGHT-self.rect.height)):
+        if (self.rect.top == (Constants.HEIGHT-self.rect.height)-5):
             self.down=False
     
     def moveLeft(self):        

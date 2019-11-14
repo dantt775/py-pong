@@ -4,6 +4,7 @@ from pygame import quit, key
 from player import Player
 from constants import Constants
 from ball import Ball
+from move_helper import MoveHelper
 
 def main():    
     pygame.init()
@@ -19,7 +20,7 @@ def main():
 
     DISPLAY.fill(BLACK)
     
-    
+    test = MoveHelper(ball.rect)
     pygame.draw.rect(DISPLAY,WHITE,player1)
     pygame.draw.rect(DISPLAY,WHITE,player2)
     pygame.draw.rect(DISPLAY,WHITE,ball)
@@ -27,10 +28,9 @@ def main():
 
     def moveBall():
         pygame.draw.rect(DISPLAY,BLACK,ball)
-        
-        ball.collission_left(player1)
-        ball.collission_right(player2)
         ball.move()
+        ball.collission_left(player1)
+        ball.collission_right(player2)        
         pygame.draw.rect(DISPLAY,WHITE,ball)
 
 
@@ -53,6 +53,27 @@ def main():
             pygame.draw.rect(DISPLAY,BLACK,player2)          
             player2.moveUp()
             pygame.draw.rect(DISPLAY,WHITE,player2) 
+
+    def move_test(keys):
+        if keys[K_j]:            
+            pygame.draw.rect(DISPLAY,BLACK,ball)
+            test.move_left()
+            pygame.draw.rect(DISPLAY,WHITE,ball)
+            
+        if keys[K_l]:
+            pygame.draw.rect(DISPLAY,BLACK,ball)
+            test.move_right()
+            pygame.draw.rect(DISPLAY,WHITE,ball)
+
+        if keys[K_k]:
+            pygame.draw.rect(DISPLAY,BLACK,ball)
+            test.move_down()
+            pygame.draw.rect(DISPLAY,WHITE,ball)
+
+        if keys[K_i]:
+            pygame.draw.rect(DISPLAY,BLACK,ball)
+            test.move_up()            
+            pygame.draw.rect(DISPLAY,WHITE,ball)
         
 
     clock=pygame.time.Clock()
@@ -66,13 +87,15 @@ def main():
         moveBall()
         check_player1(keys)
         check_player2(keys)
+        move_test(keys)
         if keys[K_ESCAPE]:
             pygame.quit()
-            sys.exit()       
-        if keys[K_o]:
-            print(f'\n ball.top={ball.rect.top}\n player.top={player1.rect.top}\n')
-            
+            sys.exit()         
         for e in pygame.event.get():            
+            # if e.type == pygame.KEYDOWN:
+            #     if e.key == pygame.K_o:
+            #         print(f'ball top: {ball.rect.top}\n player top: {player1.rect.top}')      
+            #         print(f'diff: {ball.rect.top-player1.rect.top}')
             pass
 
     

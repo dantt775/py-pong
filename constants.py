@@ -1,6 +1,6 @@
 class Constants:
-  WIDTH = 1024
-  HEIGHT = 768
+  WIDTH = 800
+  HEIGHT = 600
 
 
   PLAYER_WIDTH=15
