@@ -59,7 +59,7 @@ def main():
 
 
     while True:       
-        clock.tick(500) 
+        clock.tick(100) 
         pygame.display.update()
         
         keys = key.get_pressed() 

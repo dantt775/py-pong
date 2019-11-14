@@ -9,14 +9,27 @@ class Ball:
         self.down = True
 
 #>14 <97
+
+    def calculate_top_position(self, player):
+        value =abs(self.rect.top - player.rect.top)        
+        if (13 <= value <= 97):
+            return True
+    
+    def calculate_left_position(self, player):
+        if self.rect.left==(player.rect.left+Constants.PLAYER_WIDTH):
+            return True
+    
+    def calculate_right_position(self,player):
+        if self.rect.left==(player.rect.left-Constants.PLAYER_WIDTH):
+            return True
     
     def collission_left(self, player):
-        if(self.rect.left==(player.rect.left+Constants.PLAYER_WIDTH) and ((self.rect.top-player.rect.top)>=14 or  (self.rect.top-player.rect.top)<=97)):
-            print(f'\ncolisao esquerda \nball.left={self.rect.left}\nball.top={self.rect.top}\nplayer.top= {player.rect.top}')
+        if( self.calculate_left_position(player) and self.calculate_top_position(player)):            
             self.left = False
+
     def collission_right(self, player):
-        if(self.rect.left==(player.rect.left-Constants.PLAYER_WIDTH)):
-            print(f'\ncolisao direita \nball.left={self.rect.left}\nball.top={self.rect.top}\nplayer.top= {player.rect.top}')
+        print(f'{self.rect.top - player.rect.top}')
+        if(self.calculate_right_position(player) and self.calculate_top_position(player)):            
             self.left = True    
 
 
@@ -46,17 +59,13 @@ class Ball:
             self.rect.top+=1
         if (self.rect.top == (Constants.HEIGHT-self.rect.height)):
             self.down=False
-
-
     
-    def moveLeft(self):
-        # print(f'Left{self.rect.left}')        
+    def moveLeft(self):        
         if (self.rect.left > 0 and self.left is True):
             self.rect.left = self.rect.left-1
         
 
-    def moveRight(self):        
-        # print(f'Right{self.rect.left}')        
+    def moveRight(self):                
         if (self.rect.left < (Constants.WIDTH-self.rect.width) and self.left is False):
             self.rect.left = self.rect.left+1
 
